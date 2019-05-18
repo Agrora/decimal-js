@@ -1,7 +1,7 @@
 {
     "name": "@agrora/decimal",
     "description": "A decimal library for flointing point precision based on PHP's bcmath",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "homepage": "https://github.com/Agrora/decimal-js",
