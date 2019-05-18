@@ -1,7 +1,7 @@
 {
     "name": "@agrora/decimal",
     "description": "A decimal library for flointing point precision based on PHP's bcmath",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "homepage": "https://github.com/Agrora/decimal-js",
@@ -16,11 +16,13 @@
         "email": "t.koehn@outlook.com",
         "url": "https://agrora.market"
     },
-    "contributors": [{
-        "name": "Robert Hellmann",
-        "email": "r.hellmann@outlook.com",
-        "url": "https://agrora.market"
-    }],
+    "contributors": [
+        {
+            "name": "Robert Hellmann",
+            "email": "r.hellmann@outlook.com",
+            "url": "https://agrora.market"
+        }
+    ],
     "bugs": {
         "url": "https://github.com/Agrora/decimal-js/issues",
         "email": "t.koehn@outlook.com"
