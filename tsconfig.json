@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "target": "es6",
+        "declaration": true,
+        "lib": ["dom", "es2018", "esnext.asynciterable"],
+        "alwaysStrict": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUnusedParameters": true,
+        "downlevelIteration": true,
+        "strict": true,
+        "rootDir": "src",
+        "outDir": "dist"
+    },
+    "exclude": ["dist", "tests"]
+}

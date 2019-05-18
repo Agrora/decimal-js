@@ -1,0 +1,33 @@
+{
+    "defaultSeverity": "error",
+    "extends": ["tslint:recommended", "tslint-config-airbnb"],
+    "jsRules": {},
+    "rules": {
+        "max-line-length": [true, 120],
+        "encoding": true,
+        "indent": [true, "spaces", 4],
+        "ter-indent": false,
+        "ter-arrow-parens": false,
+        "interface-name": [true, "never-prefix"],
+        "object-literal-sort-keys": [false],
+        "no-empty": [true, "allow-empty-functions"],
+        "arrow-parens": [true, "ban-single-arg-parens"],
+        "array-type": [true, "array-simple"],
+        "prefer-array-literal": false,
+        "function-name": [true, {
+            "method-regex": "^\\*?\\[?[a-zA-Z][\\w\\d\\.]*\\]?$",
+            "private-method-regex": "^\\*?\\[?[a-zA-Z][\\w\\d\\.]*\\]?$",
+            "protected-method-regex": "^\\*?\\[?[a-zA-Z][\\w\\d\\.]*\\]?$",
+            "static-method-regex": "^\\*?\\[?[a-zA-Z][\\w\\d\\.]*\\]?$",
+            "function-regex": "^\\*?\\[?[a-zA-Z][\\w\\d\\.]*\\]?$"
+        }],
+        "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"]
+    },
+    "rulesDirectory": [],
+    "linterOptions": {
+        "exclude": [
+            "src/dummy-data/*.ts",
+            "tests/snapshots/**/*"
+        ]
+    }
+}

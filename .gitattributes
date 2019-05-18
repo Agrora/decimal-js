@@ -1,0 +1,11 @@
+/src
+/tests              export-ignore
+/.gitattributes     export-ignore
+/.gitignore         export-ignore
+/.npmrc
+/jest.config.js     export-ignore
+/tsconfig.json
+/*.md               export-ignore
+
+# Auto detect text files and perform LF normalization
+* text=auto
