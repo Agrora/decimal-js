@@ -21,13 +21,8 @@
             "static-method-regex": "^\\*?\\[?[a-zA-Z][\\w\\d\\.]*\\]?$",
             "function-regex": "^\\*?\\[?[a-zA-Z][\\w\\d\\.]*\\]?$"
         }],
-        "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"]
+        "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"],
+        "member-ordering": [true, {"order": "instance-sandwich"}]
     },
-    "rulesDirectory": [],
-    "linterOptions": {
-        "exclude": [
-            "src/dummy-data/*.ts",
-            "tests/snapshots/**/*"
-        ]
-    }
+    "rulesDirectory": []
 }

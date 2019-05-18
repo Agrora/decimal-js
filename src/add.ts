@@ -5,12 +5,12 @@ import subtractUnsigned from './subtractUnsigned';
 
 const { max } = Math;
 
-// bcmath equivalent: bcadd
-export default function add(a: DecimalInfo, b: DecimalInfo, minScale: number = 0): DecimalInfo {
+// bcmath equivalent: bc_add
+export default function add(a: DecimalInfo, b: DecimalInfo, scale: number = max(a.scale, b.scale)): DecimalInfo {
     let result;
 
     if (a.sign === b.sign) {
-        result = addUnsigned(a, b, minScale);
+        result = addUnsigned(a, b, scale);
         result.sign = a.sign;
         return result;
     }
@@ -18,17 +18,17 @@ export default function add(a: DecimalInfo, b: DecimalInfo, minScale: number = 0
     switch (compare(a, b, false)) {
         case -1:
             // n1 is less than n2, subtract n1 from n2.
-            result = subtractUnsigned(b, a, minScale);
+            result = subtractUnsigned(b, a, scale);
             result.sign = b.sign;
             break;
         case 0:
             // They are equal! return zero with the correct scale!
-            const resultScale = max(minScale, max(a.scale, b.scale));
+            const resultScale = max(scale, max(a.scale, b.scale));
             result = createInfo(1, resultScale);
             break;
         case 1:
             // n2 is less than n1, subtract n2 from n1.
-            result = subtractUnsigned(a, b, minScale);
+            result = subtractUnsigned(a, b, scale);
             result.sign = a.sign;
             break;
         default:

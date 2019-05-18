@@ -5,6 +5,7 @@ import removeLeadingZeroes from './removeLeadingZeroes';
 
 const { min, max, floor } = Math;
 
+// bcmath equivalent: bc_div
 export default function divide(
     a: DecimalInfo,
     b: DecimalInfo,

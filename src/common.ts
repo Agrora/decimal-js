@@ -14,6 +14,7 @@ export interface DecimalInfo {
 }
 
 export type DecimalComparisonResult = 1|0|-1;
+export type DecimalLike = string|number|DecimalInfo;
 
 export function createInfo(length: number = 1, scale: number = 0): DecimalInfo {
     return { length, scale, sign: DecimalSign.PLUS, value: new Uint8Array(length + scale) };
@@ -65,10 +66,10 @@ export function createInfoFromString(value: string): DecimalInfo {
     ), sign };
 }
 
-export function createStringFromInfo(info: DecimalInfo): string {
+export function createStringFromInfo(info: DecimalInfo, scale = info.scale): string {
     let str = info.value.subarray(0, info.length).join('');
-    if (info.scale > 0) {
-        str += `.${info.value.subarray(info.length, info.length + info.scale).join('')}`;
+    if (scale > 0) {
+        str += `.${info.value.subarray(info.length, info.length + scale).join('')}`;
     }
     return (info.sign === DecimalSign.MINUS ? DecimalSign.MINUS : '') + str;
 }
@@ -91,6 +92,15 @@ export function copyInfo(info: DecimalInfo): DecimalInfo {
         scale: info.scale,
         value: new Uint8Array(info.value),
     };
+}
+
+export function isInfo(value: any): value is DecimalInfo {
+    return typeof value === 'object'
+        && value !== null
+        && typeof value.length === 'number'
+        && typeof value.scale === 'number'
+        && (typeof value.sign === 'string' && [DecimalSign.PLUS, DecimalSign.MINUS].includes(value.sign))
+        && (typeof value.value === 'object' && value.value instanceof Uint8Array);
 }
 
 export function negate(info: DecimalInfo): DecimalInfo {
