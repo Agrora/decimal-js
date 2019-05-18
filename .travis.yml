@@ -1,0 +1,20 @@
+
+language: node_js
+cache: npm
+node_js:
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+script:
+    - npm run test
+    - npm run lint
+    # Validate that a new build was added
+    - npm run build
+    - git diff
+    - >-
+      if [[ $(git status --porcelain | wc -l) -gt 0 ]]; then
+          echo -e "\e[41mNo build was added. Run 'npm run build && git add --all' and commit & push again.\e[49m";
+          exit 1;
+      fi;

@@ -1,7 +1,7 @@
 Decimal JS
 ==========
 
-String-based floating point arithmetic library based on PHP's [bcmath](https://www.php.net/manual/de/book.bc.php) extension.
+Precision floating point arithmetic library based on PHP's [bcmath](https://www.php.net/manual/de/book.bc.php) extension.
 
 It's essentially a port of bcmath, but written from scratch to provide a neat
 and solid JavaScript/TypeScript API. Like, bcmath for JavaScript, but with a nice

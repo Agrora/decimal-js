@@ -5,3 +5,5 @@
 /src
 /tests
 /.idea
+/.travis.yml
+/CONTRIBUTING.md
