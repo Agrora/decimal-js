@@ -140,7 +140,7 @@ Checks if a value is an instance of the `Decimal` class so you can call
 `add`, `subtract`, `multiply` etc. on it
 
 ```javascript
-import { parseDecimal } from '@agrora/decimal';
+import { isDecimal } from '@agrora/decimal';
 
 if (isDecimal(value)) {
     console.log(value.toFixed(2));
