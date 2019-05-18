@@ -8,8 +8,7 @@ module.exports = {
         }
     },
     roots: ['<rootDir>/tests'],
-    collectCoverage: true,
-    coverageReporters: ['text'],
+    coverageReporters: ['text', 'lcov'],
     transform: {"\\.ts$": "ts-jest"},
     testRegex: "\\.test\\.ts$",
     transformIgnorePatterns: ['<rootDir>/node_modules'],
