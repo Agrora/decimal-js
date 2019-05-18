@@ -10,7 +10,7 @@ node_js:
     - 11
     - 12
 before_script:
-    - export VERSION_COMPARISON = $(dpkg --compare-versions $TRAVIS_NODE_VERSION eq 11)
+    - export VERSION_COMPARISON=$(dpkg --compare-versions $TRAVIS_NODE_VERSION eq 11)
     - >-
         if [[ $VERSION_COMPARISON -eq 0 ]]; then
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./reporter
