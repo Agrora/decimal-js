@@ -214,7 +214,7 @@ Requires: [npm][nodejs-download]
 
 ```bash
 // Pull project
-git clone https://gitlab.agrora.market/OpenSource/decimal-js
+git clone https://github.com/Agrora/decimal-js
 
 // Enter project directory
 cd decimal-js
