@@ -19,7 +19,7 @@ before_script:
             ./cc-reporter before-build
         fi;
 script:
-    - npm run test
+    - npm run test:coverage
     - npm run lint
     # Validate that a new build was added
     - npm run build
@@ -34,5 +34,5 @@ after_script:
     - >-
         if [[ $VERSION_COMPARISON -eq 0 ]]; then
             echo "Reporting test results and coverage"
-            ./cc-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+            ./cc-reporter after-build --exit-code $TRAVIS_TEST_RESULT --coverage-input-type lcov
         fi;

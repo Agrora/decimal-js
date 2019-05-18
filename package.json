@@ -30,6 +30,7 @@
     "scripts": {
         "build": "tsc",
         "test": "jest",
+        "test:coverage": "jest --coverage",
         "lint": "tslint 'src/**/*.ts'",
         "lint:fix": "tslint 'src/**/*.ts' --fix"
     },
