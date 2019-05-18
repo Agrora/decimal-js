@@ -1,2 +1,35 @@
-export declare class Decimal {
+import { DecimalComparisonResult, DecimalInfo, DecimalLike, DecimalSign } from './common';
+export default class Decimal implements DecimalInfo {
+    static readonly ZERO: Decimal;
+    static readonly ONE: Decimal;
+    static readonly MINUS_ONE: Decimal;
+    readonly length: number;
+    readonly scale: number;
+    readonly value: Uint8Array;
+    readonly sign: DecimalSign;
+    private constructor();
+    add(value: DecimalLike, scale?: number): Decimal;
+    subtract(value: DecimalLike, scale?: number): Decimal;
+    multiply(value: DecimalLike, scale?: number): Decimal;
+    divide(value: DecimalLike, scale?: number): Decimal;
+    compareTo(value: DecimalLike): DecimalComparisonResult;
+    isEqualTo(value: DecimalInfo): boolean;
+    isGreaterThan(value: DecimalInfo): boolean;
+    isGreaterThanOrEqualTo(value: DecimalLike): boolean;
+    isLowerThan(value: DecimalInfo): boolean;
+    isLowerThanOrEqualTo(value: DecimalLike): boolean;
+    isZero(): boolean;
+    isOne(): boolean;
+    isMinusOne(): boolean;
+    negate(): Decimal;
+    isNegative(): boolean;
+    isPositive(): boolean;
+    toString(): string;
+    toInt(): number;
+    toFloat(): number;
+    toFixed(scale: number): string;
+    static fromString(decimalString: string): Decimal;
+    static fromInfo(info: DecimalInfo): Decimal;
+    static fromNumber(decimalNumber: number): Decimal;
+    static from(value: DecimalLike): Decimal;
 }

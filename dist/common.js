@@ -45,10 +45,10 @@ function createInfoFromString(value) {
     return Object.assign({}, createInfoFromArray(normalizedValue.split('').map(c => parseInt(c, exports.DECIMAL_RADIX)), length, scale), { sign });
 }
 exports.createInfoFromString = createInfoFromString;
-function createStringFromInfo(info) {
+function createStringFromInfo(info, scale = info.scale) {
     let str = info.value.subarray(0, info.length).join('');
-    if (info.scale > 0) {
-        str += `.${info.value.subarray(info.length, info.length + info.scale).join('')}`;
+    if (scale > 0) {
+        str += `.${info.value.subarray(info.length, info.length + scale).join('')}`;
     }
     return (info.sign === DecimalSign.MINUS ? DecimalSign.MINUS : '') + str;
 }
@@ -67,6 +67,15 @@ function copyInfo(info) {
     };
 }
 exports.copyInfo = copyInfo;
+function isInfo(value) {
+    return typeof value === 'object'
+        && value !== null
+        && typeof value.length === 'number'
+        && typeof value.scale === 'number'
+        && (typeof value.sign === 'string' && [DecimalSign.PLUS, DecimalSign.MINUS].includes(value.sign))
+        && (typeof value.value === 'object' && value.value instanceof Uint8Array);
+}
+exports.isInfo = isInfo;
 function negate(info) {
     return Object.assign({}, info, { sign: info.sign === DecimalSign.PLUS ? DecimalSign.MINUS : DecimalSign.PLUS });
 }

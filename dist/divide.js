@@ -8,6 +8,7 @@ const compare_1 = __importDefault(require("./compare"));
 const isZero_1 = __importDefault(require("./isZero"));
 const removeLeadingZeroes_1 = __importDefault(require("./removeLeadingZeroes"));
 const { min, max, floor } = Math;
+// bcmath equivalent: bc_div
 function divide(a, b, scale = max(a.scale, b.scale)) {
     // var ptrs // return object from one_mul
     // Test for divide by zero. (return failure)
