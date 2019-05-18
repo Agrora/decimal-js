@@ -13,6 +13,7 @@ before_script:
     - export VERSION_COMPARISON=$(dpkg --compare-versions $TRAVIS_NODE_VERSION eq 11)
     - >-
         if [[ $VERSION_COMPARISON -eq 0 ]]; then
+            echo "Installing test reporter"
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./reporter
             chmod +x ./reporter
             ./reporter before-build
@@ -23,6 +24,7 @@ script:
     # Validate that a new build was added
     - npm run build
     - git diff
+    - git status
     - >-
         if [[ $(git status --porcelain | wc -l) -gt 0 ]]; then
             echo -e "\e[41mNo build was added. Run 'npm run build && git add --all' and commit & push again.\e[49m";
@@ -31,5 +33,6 @@ script:
 after_script:
     - >-
         if [[ $$VERSION_COMPARISON -eq 0 ]]; then
+            echo "Reporting test results and coverage"
             ./reporter after-build --exit-code $TRAVIS_TEST_RESULT
         fi;
