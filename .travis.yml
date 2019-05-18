@@ -23,8 +23,8 @@ script:
     - npm run lint
     # Validate that a new build was added
     - npm run build
-    - git diff
     - git status
+    - git diff
     - >-
         if [[ $(git status --porcelain | wc -l) -gt 0 ]]; then
             echo -e "\e[41mNo build was added. Run 'npm run build && git add --all' and commit & push again.\e[49m";
@@ -32,7 +32,7 @@ script:
         fi;
 after_script:
     - >-
-        if [[ $$VERSION_COMPARISON -eq 0 ]]; then
+        if [[ $VERSION_COMPARISON -eq 0 ]]; then
             echo "Reporting test results and coverage"
             ./cc-reporter after-build --exit-code $TRAVIS_TEST_RESULT
         fi;
