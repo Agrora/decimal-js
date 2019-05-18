@@ -14,9 +14,9 @@ before_script:
     - >-
         if [[ $VERSION_COMPARISON -eq 0 ]]; then
             echo "Installing test reporter"
-            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./reporter
-            chmod +x ./reporter
-            ./reporter before-build
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-reporter
+            chmod +x ./cc-reporter
+            ./cc-reporter before-build
         fi;
 script:
     - npm run test
@@ -34,5 +34,5 @@ after_script:
     - >-
         if [[ $$VERSION_COMPARISON -eq 0 ]]; then
             echo "Reporting test results and coverage"
-            ./reporter after-build --exit-code $TRAVIS_TEST_RESULT
+            ./cc-reporter after-build --exit-code $TRAVIS_TEST_RESULT
         fi;
