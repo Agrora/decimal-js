@@ -214,6 +214,8 @@ Future Scope
 ------------
 
 - [ ] Decimal.prototype.getSquareRoot()
+- [ ] Refactoring so that DecimalInfo.length is not needed anymore (based on DecimalInfo.value.length)
+- [ ] Refactoring of arithmetic methods to reduce cyclomatic complexity
 
 Credits
 -------
