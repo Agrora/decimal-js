@@ -1,6 +1,16 @@
 {
     "name": "@agrora/decimal",
     "description": "A decimal library for flointing point precision based on PHP's bcmath",
+    "keywords": [
+        "floating point",
+        "bigint",
+        "floating point precision",
+        "decimal",
+        "floating point problems",
+        "maths",
+        "bcmath",
+        "calculation"
+    ],
     "version": "0.2.0",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
