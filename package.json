@@ -2,11 +2,15 @@
     "name": "@agrora/decimal",
     "description": "A decimal library for flointing point precision based on PHP's bcmath",
     "keywords": [
-        "floating point",
-        "bigint",
-        "floating point precision",
         "decimal",
+        "float",
+        "float precision",
+        "float problems",
+        "floating point",
+        "floating point precision",
         "floating point problems",
+        "bigint",
+        "decimal",
         "maths",
         "bcmath",
         "calculation"
