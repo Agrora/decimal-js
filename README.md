@@ -1,7 +1,11 @@
 Decimal JS
 ==========
 
-Precision floating point arithmetic library based on PHP's [bcmath](https://www.php.net/manual/de/book.bc.php) extension.
+[![Build status](https://img.shields.io/travis/agrora/decimal-js/master.svg?style=flat-square)](https://travis-ci.org/agrora/decimal-js)
+[![Coverage](https://img.shields.io/codeclimate/coverage/Agrora/decimal-js.svg)](https://codecov.io/github/Agrora/decimal-js?branch=master)
+[![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/@agrora/decimal.svg)](https://snyk.io/package/npm/@agrora/decimal)
+
+Arbitrary precision floating point arithmetic library based on PHP's [bcmath](https://github.com/php/php-src/tree/master/ext/bcmath/libbcmath) extension.
 
 It's essentially a port of bcmath, but written from scratch to provide a neat
 and solid JavaScript/TypeScript API. Like, bcmath for JavaScript, but with a nice
@@ -14,7 +18,7 @@ Installation
 npm i @agrora/decimal
 ```
 
-TypeScript is supported out of the box. You don't need to install any typings.
+**TypeScript** is supported out of the box. You don't need to install any typings.
 
 Usage
 -----
