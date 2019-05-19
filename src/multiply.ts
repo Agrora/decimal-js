@@ -193,7 +193,7 @@ export function shiftAddSubtract(
     }
 
     if (accum.length + accum.scale < shift + count) {
-        throw new Error('len + scale < shift + count');
+        throw Error('len + scale < shift + count');
     }
 
     // Set up pointers and others

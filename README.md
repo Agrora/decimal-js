@@ -92,11 +92,22 @@ class Decimal {
     static fromNumber(value: number): Decimal;
     static fromInfo(value: DecimalInfo): Decimal;
     
+    static isDecimal(value: any): value is Decimal;
+    static isDecimalLike(value: any): value is DecimalLike;
+    
+    static min(...values: DecimalLike[]): Decimal;
+    static max(...values: DecimalLike[]): Decimal;
+    
     // Basic arithmetic
     add(value: DecimalLike, scale?: number): Decimal;
     subtract(value: DecimalLike, scale?: number): Decimal;
     multiply(value: DecimalLike, scale?: number): Decimal;
     divide(value: DecimalLike, scale?: number): Decimal;
+    
+    modulo(value: DecimalLike, scale?: number): Decimal;
+    divideModulo(value: DecimalLike, scale?: number): [Decimal, Decimal];
+    
+    raise(value: DecimalLike, scale?: number): Decimal;
     
     // Comparisons
     compareTo(value: DecimalLike): 1|0|-1;
@@ -118,46 +129,6 @@ class Decimal {
     toInt(): number;
     toFloat(): number;
     toFixed(scale: number): number;
-}
-```
-
-
-### Functions
-
-#### parseDecimal
-
-A wrapper for `Decimal.from` to fit into other `parse<Type>` function patterns
-
-```javascript
-import { parseDecimal } from '@agrora/decimal';
-
-const decimal = parseDecimal('0.2');
-```
-
-#### isDecimal
-
-Checks if a value is an instance of the `Decimal` class so you can call
-`add`, `subtract`, `multiply` etc. on it
-
-```javascript
-import { isDecimal } from '@agrora/decimal';
-
-if (isDecimal(value)) {
-    console.log(value.toFixed(2));
-}
-```
-
-#### isDecimalLike
-
-Checks if a value is any valid value you could
-pass to `Decimal.from()` for it to create a valid
-decimal instance for it
-
-```javascript
-import { isDecimalLike, parseDecimal } from '@agrora/decimal';
-
-if (isDecimalLike(value)) {
-    const value = parseDecimal(value);
 }
 ```
 
@@ -242,7 +213,6 @@ npm run build
 Future Scope
 ------------
 
-- [ ] Decimal.prototype.raise(exponent: DecimalLike): Decimal
 - [ ] Decimal.prototype.getSquareRoot()
 
 Credits

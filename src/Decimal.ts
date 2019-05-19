@@ -1,23 +1,26 @@
 import add from './add';
 import {
-    createInfo,
-    createInfoFromArray,
     createInfoFromString,
     createStringFromInfo, DECIMAL_RADIX, DecimalComparisonResult,
     DecimalInfo, DecimalLike,
-    DecimalSign, isInfo,
+    DecimalSign, INFO_MINUS_ONE, INFO_ONE, INFO_ZERO, isInfo,
     negate,
 } from './common';
 import compare from './compare';
 import divide from './divide';
 import isZero from './isZero';
+import max from './max';
+import min from './min';
+import modulo from './modulo';
 import multiply from './multiply';
+import raise from './raise';
 import subtract from './subtract';
+import divideModulo from './divideModulo';
 
 export default class Decimal implements DecimalInfo {
-    public static readonly ZERO = Decimal.fromInfo(createInfo());
-    public static readonly ONE = Decimal.fromInfo(createInfoFromArray([1]));
-    public static readonly MINUS_ONE = Decimal.fromInfo(negate(createInfoFromArray([1])));
+    public static readonly ZERO = Decimal.fromInfo(INFO_ZERO);
+    public static readonly ONE = Decimal.fromInfo(INFO_ONE);
+    public static readonly MINUS_ONE = Decimal.fromInfo(INFO_MINUS_ONE);
 
     public readonly length: number;
     public readonly scale: number;
@@ -45,6 +48,19 @@ export default class Decimal implements DecimalInfo {
 
     public divide(value: DecimalLike, scale?: number): Decimal {
         return Decimal.fromInfo(divide(this, Decimal.from(value), scale));
+    }
+
+    public raise(value: DecimalLike, scale?: number): Decimal {
+        return Decimal.fromInfo(raise(this, Decimal.from(value), scale));
+    }
+
+    public modulo(value: DecimalLike, scale?: number): Decimal {
+        return Decimal.fromInfo(modulo(this, Decimal.from(value), scale));
+    }
+
+    public divideModulo(value: DecimalLike, scale?: number): [Decimal, Decimal] {
+        const [quotient, remainder] = divideModulo(this, Decimal.from(value), scale);
+        return [Decimal.from(quotient), Decimal.from(remainder)];
     }
 
     public compareTo(value: DecimalLike): DecimalComparisonResult {
@@ -111,16 +127,24 @@ export default class Decimal implements DecimalInfo {
         return createStringFromInfo(this, scale);
     }
 
+    public static max(...values: DecimalLike[]): Decimal {
+        return Decimal.from(max(...values.map(Decimal.from)));
+    }
+
+    public static min(...values: DecimalLike[]): Decimal {
+        return Decimal.from(min(...values.map(Decimal.from)));
+    }
+
     public static fromString(decimalString: string): Decimal {
         return Decimal.fromInfo(createInfoFromString(decimalString));
     }
 
-    public static fromInfo(info: DecimalInfo): Decimal {
-        return new Decimal(info.length, info.scale, info.value, info.sign);
+    public static fromInfo(value: DecimalInfo): Decimal {
+        return new Decimal(value.length, value.scale, value.value, value.sign);
     }
 
-    public static fromNumber(decimalNumber: number): Decimal {
-        return Decimal.fromInfo(createInfoFromString(decimalNumber.toString(DECIMAL_RADIX)));
+    public static fromNumber(value: number): Decimal {
+        return Decimal.fromInfo(createInfoFromString(value.toString(DECIMAL_RADIX)));
     }
 
     public static from(value: DecimalLike): Decimal {
@@ -136,6 +160,14 @@ export default class Decimal implements DecimalInfo {
         if (isInfo(value)) {
             return Decimal.fromInfo(value);
         }
-        throw new Error(`Don't know how to parse value of type ${typeof value} to decimal`);
+        throw Error(`Don't know how to parse value of type ${typeof value} to decimal`);
+    }
+
+    public static isDecimal(value: any): value is Decimal {
+        return value instanceof Decimal;
+    }
+
+    public static isDecimalLike(value: any): value is DecimalLike {
+        return value instanceof Decimal || ['string', 'number'].includes(typeof value) || isInfo(value);
     }
 }

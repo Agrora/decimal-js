@@ -32,7 +32,7 @@ export default function subtract(a: DecimalInfo, b: DecimalInfo, scale: number =
             result.sign = a.sign;
             break;
         default:
-            throw new Error('Invalid decimal comparison result');
+            throw Error('Invalid decimal comparison result');
     }
 
     return result;

@@ -7,8 +7,6 @@ import {
     createInfoFromString,
     createStringFromInfo,
     createSubInfo,
-    DecimalLike,
-    isInfo,
 } from './common';
 import compare from './compare';
 import Decimal from './Decimal';
@@ -40,15 +38,3 @@ export {
     isZero,
     removeLeadingZeroes,
 };
-
-export function parseDecimal(value: DecimalLike): Decimal {
-    return Decimal.from(value);
-}
-
-export function isDecimal(value: unknown): value is Decimal {
-    return value instanceof Decimal;
-}
-
-export function isDecimalLike(value: unknown): value is DecimalLike {
-    return isDecimal(value) || ['string', 'number'].includes(typeof value) || isInfo(value);
-}

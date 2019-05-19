@@ -1,4 +1,4 @@
-import { createInfo, createInfoFromArray, DECIMAL_RADIX, DecimalInfo, DecimalSign } from './common';
+import {copyInfo, createInfo, createInfoFromArray, DECIMAL_RADIX, DecimalInfo, DecimalSign} from './common';
 import compare from './compare';
 import isZero from './isZero';
 import removeLeadingZeroes from './removeLeadingZeroes';
@@ -15,7 +15,7 @@ export default function divide(
     // var ptrs // return object from one_mul
     // Test for divide by zero. (return failure)
     if (isZero(b)) {
-        throw new Error('Division by zero');
+        throw Error('Division by zero');
     }
 
     // Test for zero divide by anything (return zero)
@@ -85,6 +85,9 @@ export default function divide(
     qval = createInfo(qdigits - scale, scale);
     const mval = new Uint8Array(len2 + 1);
 
+    // TODO: Create a backup of b to restore later, oneMult right now modifies it
+    const bBackup = copyInfo(b);
+
     // Now for the full divide algorithm.
     if (!zero) { // Normalize
         // norm = Libbcmath.cint(10 / (Libbcmath.cint(n2.n_value[n2ptr]) + 1));
@@ -94,8 +97,7 @@ export default function divide(
             oneMult(num1, 0, len1 + scale1 + extra + 1, norm, num1, 0);
             // Libbcmath._one_mult(n2ptr, len2, norm, n2ptr);
             oneMult(b.value, aPos, len2, norm, b.value, aPos);
-            // @todo: Check: Is the pointer affected by the call? if so,
-            // maybe need to adjust points on return?
+            // TODO: b.value is modified after this call, that's why we use the bBackup workaround until it's fixed
         }
 
         // Initialize divide loop.
@@ -203,6 +205,8 @@ export default function divide(
     if (isZero(qval)) {
         qval.sign = DecimalSign.PLUS;
     }
+    // TODO: This is part of our bBackup prodecure above
+    Object.assign(b, bBackup);
     return removeLeadingZeroes(qval);
 }
 

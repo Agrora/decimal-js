@@ -16,6 +16,10 @@ export interface DecimalInfo {
 export type DecimalComparisonResult = 1|0|-1;
 export type DecimalLike = string|number|DecimalInfo;
 
+export const INFO_ZERO = createInfo();
+export const INFO_ONE = createInfoFromArray([1]);
+export const INFO_MINUS_ONE = negate(createInfoFromArray([1]));
+
 export function createInfo(length: number = 1, scale: number = 0): DecimalInfo {
     return { length, scale, sign: DecimalSign.PLUS, value: new Uint8Array(length + scale) };
 }
@@ -36,7 +40,7 @@ export function createInfoFromString(value: string): DecimalInfo {
         throw new TypeError(`Invalid ${typeof value} argument passed, string expected`);
     }
     if (!value.match(DECIMAL_VALIDATION_REGEX)) {
-        throw new Error(`Invalid decimal string ${value} provided`);
+        throw Error(`Invalid decimal string ${value} provided`);
     }
     let normalizedValue = value;
     let sign = DecimalSign.PLUS;
