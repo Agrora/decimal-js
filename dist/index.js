@@ -30,15 +30,3 @@ exports.subtract = subtract_1.default;
 const subtractUnsigned_1 = __importDefault(require("./subtractUnsigned"));
 exports.subtractUnsigned = subtractUnsigned_1.default;
 exports.default = Decimal_1.default;
-function parseDecimal(value) {
-    return Decimal_1.default.from(value);
-}
-exports.parseDecimal = parseDecimal;
-function isDecimal(value) {
-    return value instanceof Decimal_1.default;
-}
-exports.isDecimal = isDecimal;
-function isDecimalLike(value) {
-    return isDecimal(value) || ['string', 'number'].includes(typeof value) || common_1.isInfo(value);
-}
-exports.isDecimalLike = isDecimalLike;

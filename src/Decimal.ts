@@ -8,6 +8,7 @@ import {
 } from './common';
 import compare from './compare';
 import divide from './divide';
+import divideModulo from './divideModulo';
 import isZero from './isZero';
 import max from './max';
 import min from './min';
@@ -15,7 +16,6 @@ import modulo from './modulo';
 import multiply from './multiply';
 import raise from './raise';
 import subtract from './subtract';
-import divideModulo from './divideModulo';
 
 export default class Decimal implements DecimalInfo {
     public static readonly ZERO = Decimal.fromInfo(INFO_ZERO);

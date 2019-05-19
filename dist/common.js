@@ -7,6 +7,9 @@ var DecimalSign;
     DecimalSign["PLUS"] = "+";
     DecimalSign["MINUS"] = "-";
 })(DecimalSign = exports.DecimalSign || (exports.DecimalSign = {}));
+exports.INFO_ZERO = createInfo();
+exports.INFO_ONE = createInfoFromArray([1]);
+exports.INFO_MINUS_ONE = negate(createInfoFromArray([1]));
 function createInfo(length = 1, scale = 0) {
     return { length, scale, sign: DecimalSign.PLUS, value: new Uint8Array(length + scale) };
 }
@@ -22,7 +25,7 @@ function createInfoFromString(value) {
         throw new TypeError(`Invalid ${typeof value} argument passed, string expected`);
     }
     if (!value.match(exports.DECIMAL_VALIDATION_REGEX)) {
-        throw new Error(`Invalid decimal string ${value} provided`);
+        throw Error(`Invalid decimal string ${value} provided`);
     }
     let normalizedValue = value;
     let sign = DecimalSign.PLUS;

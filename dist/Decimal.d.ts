@@ -12,6 +12,9 @@ export default class Decimal implements DecimalInfo {
     subtract(value: DecimalLike, scale?: number): Decimal;
     multiply(value: DecimalLike, scale?: number): Decimal;
     divide(value: DecimalLike, scale?: number): Decimal;
+    raise(value: DecimalLike, scale?: number): Decimal;
+    modulo(value: DecimalLike, scale?: number): Decimal;
+    divideModulo(value: DecimalLike, scale?: number): [Decimal, Decimal];
     compareTo(value: DecimalLike): DecimalComparisonResult;
     isEqualTo(value: DecimalInfo): boolean;
     isGreaterThan(value: DecimalInfo): boolean;
@@ -28,8 +31,12 @@ export default class Decimal implements DecimalInfo {
     toInt(): number;
     toFloat(): number;
     toFixed(scale: number): string;
+    static max(...values: DecimalLike[]): Decimal;
+    static min(...values: DecimalLike[]): Decimal;
     static fromString(decimalString: string): Decimal;
-    static fromInfo(info: DecimalInfo): Decimal;
-    static fromNumber(decimalNumber: number): Decimal;
+    static fromInfo(value: DecimalInfo): Decimal;
+    static fromNumber(value: number): Decimal;
     static from(value: DecimalLike): Decimal;
+    static isDecimal(value: any): value is Decimal;
+    static isDecimalLike(value: any): value is DecimalLike;
 }

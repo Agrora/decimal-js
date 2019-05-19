@@ -12,6 +12,9 @@ export interface DecimalInfo {
 }
 export declare type DecimalComparisonResult = 1 | 0 | -1;
 export declare type DecimalLike = string | number | DecimalInfo;
+export declare const INFO_ZERO: DecimalInfo;
+export declare const INFO_ONE: DecimalInfo;
+export declare const INFO_MINUS_ONE: DecimalInfo;
 export declare function createInfo(length?: number, scale?: number): DecimalInfo;
 export declare function createInfoFromArray(value: ArrayLike<number>, length?: number, scale?: number, offset?: number): DecimalInfo;
 export declare function createInfoFromString(value: string): DecimalInfo;

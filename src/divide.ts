@@ -1,4 +1,4 @@
-import {copyInfo, createInfo, createInfoFromArray, DECIMAL_RADIX, DecimalInfo, DecimalSign} from './common';
+import { copyInfo, createInfo, createInfoFromArray, DECIMAL_RADIX, DecimalInfo, DecimalSign } from './common';
 import compare from './compare';
 import isZero from './isZero';
 import removeLeadingZeroes from './removeLeadingZeroes';

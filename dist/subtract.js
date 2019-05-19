@@ -33,7 +33,7 @@ function subtract(a, b, scale = max(a.scale, b.scale)) {
             result.sign = a.sign;
             break;
         default:
-            throw new Error('Invalid decimal comparison result');
+            throw Error('Invalid decimal comparison result');
     }
     return result;
 }

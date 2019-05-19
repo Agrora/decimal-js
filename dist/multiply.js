@@ -170,7 +170,7 @@ function shiftAddSubtract(accumulator, info, shift, sub = false) {
         count -= 1;
     }
     if (accum.length + accum.scale < shift + count) {
-        throw new Error('len + scale < shift + count');
+        throw Error('len + scale < shift + count');
     }
     // Set up pointers and others
     // (signed char *)(accum->n_value + accum->n_len + accum->n_scale - shift - 1);

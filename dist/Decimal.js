@@ -7,8 +7,13 @@ const add_1 = __importDefault(require("./add"));
 const common_1 = require("./common");
 const compare_1 = __importDefault(require("./compare"));
 const divide_1 = __importDefault(require("./divide"));
+const divideModulo_1 = __importDefault(require("./divideModulo"));
 const isZero_1 = __importDefault(require("./isZero"));
+const max_1 = __importDefault(require("./max"));
+const min_1 = __importDefault(require("./min"));
+const modulo_1 = __importDefault(require("./modulo"));
 const multiply_1 = __importDefault(require("./multiply"));
+const raise_1 = __importDefault(require("./raise"));
 const subtract_1 = __importDefault(require("./subtract"));
 class Decimal {
     constructor(length, scale, value, sign) {
@@ -28,6 +33,16 @@ class Decimal {
     }
     divide(value, scale) {
         return Decimal.fromInfo(divide_1.default(this, Decimal.from(value), scale));
+    }
+    raise(value, scale) {
+        return Decimal.fromInfo(raise_1.default(this, Decimal.from(value), scale));
+    }
+    modulo(value, scale) {
+        return Decimal.fromInfo(modulo_1.default(this, Decimal.from(value), scale));
+    }
+    divideModulo(value, scale) {
+        const [quotient, remainder] = divideModulo_1.default(this, Decimal.from(value), scale);
+        return [Decimal.from(quotient), Decimal.from(remainder)];
     }
     compareTo(value) {
         return compare_1.default(this, Decimal.from(value));
@@ -77,14 +92,20 @@ class Decimal {
     toFixed(scale) {
         return common_1.createStringFromInfo(this, scale);
     }
+    static max(...values) {
+        return Decimal.from(max_1.default(...values.map(Decimal.from)));
+    }
+    static min(...values) {
+        return Decimal.from(min_1.default(...values.map(Decimal.from)));
+    }
     static fromString(decimalString) {
         return Decimal.fromInfo(common_1.createInfoFromString(decimalString));
     }
-    static fromInfo(info) {
-        return new Decimal(info.length, info.scale, info.value, info.sign);
+    static fromInfo(value) {
+        return new Decimal(value.length, value.scale, value.value, value.sign);
     }
-    static fromNumber(decimalNumber) {
-        return Decimal.fromInfo(common_1.createInfoFromString(decimalNumber.toString(common_1.DECIMAL_RADIX)));
+    static fromNumber(value) {
+        return Decimal.fromInfo(common_1.createInfoFromString(value.toString(common_1.DECIMAL_RADIX)));
     }
     static from(value) {
         if (value instanceof Decimal) {
@@ -99,10 +120,16 @@ class Decimal {
         if (common_1.isInfo(value)) {
             return Decimal.fromInfo(value);
         }
-        throw new Error(`Don't know how to parse value of type ${typeof value} to decimal`);
+        throw Error(`Don't know how to parse value of type ${typeof value} to decimal`);
+    }
+    static isDecimal(value) {
+        return value instanceof Decimal;
+    }
+    static isDecimalLike(value) {
+        return value instanceof Decimal || ['string', 'number'].includes(typeof value) || common_1.isInfo(value);
     }
 }
-Decimal.ZERO = Decimal.fromInfo(common_1.createInfo());
-Decimal.ONE = Decimal.fromInfo(common_1.createInfoFromArray([1]));
-Decimal.MINUS_ONE = Decimal.fromInfo(common_1.negate(common_1.createInfoFromArray([1])));
+Decimal.ZERO = Decimal.fromInfo(common_1.INFO_ZERO);
+Decimal.ONE = Decimal.fromInfo(common_1.INFO_ONE);
+Decimal.MINUS_ONE = Decimal.fromInfo(common_1.INFO_MINUS_ONE);
 exports.default = Decimal;
